@@ -17,7 +17,7 @@ function Profile({ user, onLogout }) {
       />
 
       {showProfile && (
-        <div className="absolute right-0 top-14 w-56 sm:w-60 rounded-2xl border border-gray-200 bg-slate-50/70 p-4 sm:p-6 shadow-2xl backdrop-blur-md">
+        <div className="absolute left-20  w-56 sm:w-60 rounded-2xl border border-gray-200 bg-slate-50/70 p-4 sm:p-3 shadow-2xl backdrop-blur-md">
 
           <div className="mb-2 flex items-center gap-3">
             <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-violet-100 text-lg sm:text-xl font-bold text-violet-700">
