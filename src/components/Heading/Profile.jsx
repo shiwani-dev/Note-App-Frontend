@@ -8,62 +8,52 @@ function Profile({ user, onLogout }) {
   };
 
   return (
-    <div className="relative flex p-4">
+    <div className="relative flex p-2 sm:p-4">
       <img
         src={`https://ui-avatars.com/api/?name=${user.name}`}
         alt="profile"
-        className=" rounded-full cursor-pointer"
+        className="w-10 h-10 sm:w-12 sm:h-12 rounded-full cursor-pointer"
         onClick={toggleProfile}
       />
 
       {showProfile && (
-       <div className="absolute right-30 w-60 rounded-2xl border border-gray-200 bg-slate-50/70 p-6 shadow-2xl backdrop-blur-md">
+        <div className="absolute right-0 top-14 w-56 sm:w-60 rounded-2xl border border-gray-200 bg-slate-50/70 p-4 sm:p-6 shadow-2xl backdrop-blur-md">
 
-  <div className="mb-2 flex items-center gap-3">
-    
-    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-violet-100 text-xl font-bold text-violet-700">
-      {user.name?.charAt(0)}
-    </div>
+          <div className="mb-2 flex items-center gap-3">
+            <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-violet-100 text-lg sm:text-xl font-bold text-violet-700">
+              {user.name?.charAt(0)}
+            </div>
 
-    <div>
-      <h2 className="text-lg font-semibold text-violet-700">
-        Welcome back !
-      </h2>
+            <div>
+              <h2 className="text-sm sm:text-lg font-semibold text-violet-700">
+                Welcome back !
+              </h2>
+              <p className="text-xs sm:text-sm text-black">
+                User Dashboard
+              </p>
+            </div>
+          </div>
 
-      <p className="text-sm text-black">
-        User Dashboard
-      </p>
-    </div>
-  </div>
+          <div className="mb-4 border-t border-gray-200"></div>
 
-  <div className="mb-4 border-t border-gray-200"></div>
+          <div className="space-y-1 text-left">
+            <p className="text-sm sm:text-base text-black">
+              Name : {user.name}
+            </p>
 
-  <div className="space-y-1 text-left">
+            <p className="truncate text-xs sm:text-sm text-black">
+              Email : {user.email}
+            </p>
+          </div>
 
-    <div>
-     
+          <button
+            onClick={onLogout}
+            className="mt-4 sm:mt-6 w-full rounded-xl bg-violet-700 py-2 text-sm sm:text-base font-medium text-white transition hover:bg-violet-800 active:scale-[0.98]"
+          >
+            Logout
+          </button>
 
-      <p className=" text-black">
-       Name : {user.name}
-      </p>
-    </div>
-
-    <div>
-      <p className="truncate text-sm text-black">
-        Email : {user.email}
-      </p>
-    </div>
-
-  </div>
-
-  <button
-    onClick={onLogout}
-    className="mt-6 w-full rounded-xl bg-violet-700 py-2 font-medium text-white transition hover:bg-violet-800 active:scale-[0.98]"
-  >
-    Logout
-  </button>
-
-</div>
+        </div>
       )}
     </div>
   );

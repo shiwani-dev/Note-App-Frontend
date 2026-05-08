@@ -14,48 +14,50 @@ function SignupForm({
   name,
 }) {
   const handleSubmit = (e) => {
-  e.preventDefault();
-  handleSignup(e);
-};
+    e.preventDefault();
+    handleSignup(e);
+  };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-linear-to-br from-black via-purple-950 to-purple-700">
+    <div className="flex min-h-screen items-center justify-center px-4 bg-linear-to-br from-black via-purple-950 to-purple-700">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md rounded-1xl border border-white/30 bg-white/25 p-8 shadow-2xl backdrop-blur-md"
+        className="w-full max-w-md rounded-xl border border-white/30 bg-white/25 p-5 sm:p-8 shadow-2xl backdrop-blur-md space-y-4"
       >
         <div className="text-center">
-          <h1 className="mb-2 text-2xl text-white font-extrabold">Sign Up</h1>
-          <p className="mb-5 text-sm text-white">
+          <h1 className="mb-2 text-xl sm:text-2xl text-white font-extrabold">
+            Sign Up
+          </h1>
+          <p className="mb-5 text-xs sm:text-sm text-white">
             Create your account and start organizing your notes.
           </p>
         </div>
 
         {error && (
-          <p className="mb-4 rounded-xl bg-red-50 px-4 py-2 text-center text-sm font-medium text-red-600">
+          <p className="rounded-xl bg-red-50 px-4 py-2 text-center text-sm font-medium text-red-600">
             {error}
           </p>
         )}
 
-        <div className="flex gap-3">
-         <button
-          type="button"
-          className="flex-1 flex items-center justify-center gap-2 rounded-2xl bg-violet-200 py-2 text-sm font-medium text-slate-700 transition hover:bg-gray-300"
-        >
-          <FcGoogle size={20} />
-          Google
-        </button>
+        <div className="flex flex-col sm:flex-row gap-3">
+          <button
+            type="button"
+            className="flex-1 flex items-center justify-center gap-2 rounded-2xl bg-violet-200 py-2 sm:py-3 text-xs sm:text-sm font-medium text-slate-700 transition hover:bg-gray-300"
+          >
+            <FcGoogle size={20} />
+            Google
+          </button>
 
-        <button
-        type="button"
-        className="flex-1 flex items-center justify-center gap-2 rounded-2xl bg-violet-200 py-2 text-sm text-slate-700 transition hover:bg-gray-300"
-      >
-        <FaFacebook size={20} className="text-blue-600" />
-        Facebook
-      </button>
+          <button
+            type="button"
+            className="flex-1 flex items-center justify-center gap-2 rounded-2xl bg-violet-200 py-2 sm:py-3 text-xs sm:text-sm text-slate-700 transition hover:bg-gray-300"
+          >
+            <FaFacebook size={20} className="text-blue-600" />
+            Facebook
+          </button>
         </div>
 
-        <div className="my-5 flex items-center gap-3 text-xs text-slate-400">
+        <div className="flex items-center gap-3 text-xs text-slate-400">
           <div className="h-px flex-1 bg-slate-300"></div>
           <span>or</span>
           <div className="h-px flex-1 bg-slate-300"></div>
@@ -68,41 +70,41 @@ function SignupForm({
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Enter your full name"
-            className="mt-2 w-full rounded-2xl border border-white/40 bg-violet-200 px-4 py-3 text-sm outline-none focus:border-violet-400 focus:ring-4 focus:ring-violet-100"
+            className="mt-2 w-full rounded-2xl border border-white/40 bg-violet-200 px-3 py-2 sm:px-4 sm:py-3 text-sm outline-none focus:border-violet-400 focus:ring-4 focus:ring-violet-100"
           />
         </div>
 
-        <div className="mt-4">
-          <label className="text-sm  text-white font-medium">Email</label>
+        <div>
+          <label className="text-sm text-white font-medium">Email</label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
-            className="mt-2 w-full rounded-2xl border border-white/40 bg-violet-200 px-4 py-3 text-sm outline-none focus:border-violet-400 focus:ring-4 focus:ring-violet-100"
+            className="mt-2 w-full rounded-2xl border border-white/40 bg-violet-200 px-3 py-2 sm:px-4 sm:py-3 text-sm outline-none focus:border-violet-400 focus:ring-4 focus:ring-violet-100"
           />
         </div>
 
-        <div className="mt-4">
+        <div>
           <label className="text-sm text-white font-medium">Password</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Create a password"
-            className="mt-2 w-full rounded-2xl border border-white/40 bg-violet-200 px-4 py-3 text-sm outline-none focus:border-violet-400 focus:ring-4 focus:ring-violet-100"
+            className="mt-2 w-full rounded-2xl border border-white/40 bg-violet-200 px-3 py-2 sm:px-4 sm:py-3 text-sm outline-none focus:border-violet-400 focus:ring-4 focus:ring-violet-100"
           />
         </div>
 
         <button
           type="submit"
           disabled={loading}
-          className="mt-5 w-full rounded-2xl py-3 text-sm font-semibold text-white bg-violet-600 disabled:cursor-not-allowed transition hover:bg-violet-700 disabled:opacity-60"
+          className="w-full rounded-2xl py-3 text-sm font-semibold text-white bg-violet-600 disabled:cursor-not-allowed transition hover:bg-violet-700 disabled:opacity-60"
         >
           {loading ? "Creating account..." : "Create Account"}
         </button>
 
-        <p className="mt-4 text-center text-white text-sm">
+        <p className="text-center text-white text-sm">
           Already have an account?{" "}
           <Link to="/" className="hover:underline">
             Login
