@@ -1,14 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 function Profile({ user, onLogout }) {
   const [showProfile, setShowProfile] = useState(false);
+  const ref = useRef()
 
   const toggleProfile = () => {
     setShowProfile((prev) => !prev);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) {
+        setShowProfile(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+
   return (
-    <div className="relative flex p-2 sm:p-4">
+    <div className="relative flex p-2 sm:p-4" ref={ref}>
       <img
         src={`https://ui-avatars.com/api/?name=${user.name}`}
         alt="profile"
