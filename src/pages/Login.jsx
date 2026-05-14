@@ -13,11 +13,12 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    await login({ email, password }, (success) => {
-      if (success) {
-        navigate("/notes", { replace: true });
-      }
-    });
+    try {
+      await login({ email, password });
+      navigate("/notes", { replace: true });
+    } catch {
+      // The mutation already exposes the error state to the form.
+    }
   };
 
   return (
