@@ -18,7 +18,6 @@ function NotesUI({
   editNote,
   deleteNote,
   toggleSelect,
-  isPending,
 }) {
   return (
     <section className="rounded-3xl border border-purple-100 p-5 shadow-xl backdrop-blur">
@@ -44,13 +43,6 @@ function NotesUI({
           </button>
         )}
       </div>
-
-      {isPending && (
-        <div className="mb-4 flex justify-center gap-2 text-sm text-gray-400">
-          <div className="h-4 w-4 animate-spin rounded-full border-2 border-gray-200 border-t-purple-500"></div>
-          Updating...
-        </div>
-      )}
 
       {loading ? (
         <LoadingSkeleton />

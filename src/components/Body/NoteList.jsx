@@ -7,9 +7,8 @@ function NoteList({
   deleteNote,
   selectedNotes,
   toggleSelect,
-  loading
 }) {
-  if (!loading&&notes?.length === 0) {
+  if (notes?.length === 0) {
     return (
       <div className="rounded-3xl border border-dashed border-slate-200 bg-slate-50/70 p-10 text-center">
         <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full text-black text-2xl">

@@ -11,5 +11,3 @@ export const signupApi = (userData) => {
 export const loginApi = (userData) => {
   return API.post("/auth/login", userData);
 };
-
-export default API;
