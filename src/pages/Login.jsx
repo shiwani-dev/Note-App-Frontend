@@ -1,33 +1,32 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import LoginForm from "@/components/auth/LoginForm";
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const { login, loading, error } = useAuth();
+  const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-
+  const onSubmit = async (data) => {
     try {
-      await login({ email, password });
-      navigate("/notes", { replace: true });
+      await login(data);
+      navigate("/notes");
     } catch {
-      // The mutation already exposes the error state to the form.
+      // error already handled
     }
   };
 
   return (
     <LoginForm
-      email={email}
-      setEmail={setEmail}
-      password={password}
-      setPassword={setPassword}
-      handleLogin={handleLogin}
+      register={register}
+      handleSubmit={handleSubmit}
+      errors={errors}
+      onSubmit={onSubmit}
       loading={loading}
       error={error}
     />

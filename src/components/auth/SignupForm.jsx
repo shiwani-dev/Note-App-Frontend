@@ -3,25 +3,17 @@ import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
 
 function SignupForm({
-  handleSignup,
-  error,
-  setName,
-  email,
-  setEmail,
-  password,
-  setPassword,
-  loading,
-  name,
+  handleSubmit,
+  onSubmit,
+  register,
+  errors,
+  errorSignup,
+  loadingSignup,
 }) {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleSignup(e);
-  };
-
   return (
     <div className="flex min-h-screen items-center justify-center px-4 bg-linear-to-br from-black via-purple-950 to-purple-700">
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         className="w-full max-w-md rounded-xl border border-white/30 bg-white/25 p-5 sm:p-8 shadow-2xl backdrop-blur-md space-y-4"
       >
         <div className="text-center">
@@ -32,12 +24,6 @@ function SignupForm({
             Create your account and start organizing your notes.
           </p>
         </div>
-
-        {error && (
-          <p className="rounded-xl bg-red-50 px-4 py-2 text-center text-sm font-medium text-red-600">
-            {error}
-          </p>
-        )}
 
         <div className="flex flex-col sm:flex-row gap-3">
           <button
@@ -66,42 +52,64 @@ function SignupForm({
         <div>
           <label className="text-sm text-white font-medium">Full Name</label>
           <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
             placeholder="Enter your full name"
+            {...register("name", {
+              required: "Name is required",
+            })}
             className="mt-2 w-full rounded-2xl border border-white/40 bg-violet-200 px-3 py-2 sm:px-4 sm:py-3 text-sm outline-none focus:border-violet-400 focus:ring-4 focus:ring-violet-100"
           />
+          {errors.name && (
+            <p className="text-red-400 text-sm mt-1">{errors.name.message}</p>
+          )}
         </div>
 
         <div>
           <label className="text-sm text-white font-medium">Email</label>
           <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: "Invalid email",
+              },
+            })}
             className="mt-2 w-full rounded-2xl border border-white/40 bg-violet-200 px-3 py-2 sm:px-4 sm:py-3 text-sm outline-none focus:border-violet-400 focus:ring-4 focus:ring-violet-100"
           />
+          {errors.email && (
+            <p className="text-red-400 text-sm mt-1">{errors.email.message}</p>
+          )}
         </div>
 
         <div>
           <label className="text-sm text-white font-medium">Password</label>
           <input
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            {...register("password", {
+              required: "Password is required",
+              minLength: {
+                value: 6,
+                message: "Password must be at least 6 characters",
+              },
+            })}
             placeholder="Create a password"
             className="mt-2 w-full rounded-2xl border border-white/40 bg-violet-200 px-3 py-2 sm:px-4 sm:py-3 text-sm outline-none focus:border-violet-400 focus:ring-4 focus:ring-violet-100"
           />
+          {errors.password && (
+            <p className="text-red-400 text-sm mt-1">
+              {errors.password.message}
+            </p>
+          )}
+          {errorSignup && (
+            <p className="text-red-400 text-sm mt-1">{errorSignup.message}</p>
+          )}
         </div>
 
         <button
-          type="submit"
-          disabled={loading}
-          className="w-full rounded-2xl py-3 text-sm font-semibold text-white bg-violet-600 disabled:cursor-not-allowed transition hover:bg-violet-700 disabled:opacity-60"
+          disabled={loadingSignup}
+          className="w-full rounded-xl bg-violet-600 py-3 text-sm font-semibold text-white transition hover:bg-violet-700 disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {loading ? "Creating account..." : "Create Account"}
+          {loadingSignup ? "Signing..." : "Signup"}
         </button>
 
         <p className="text-center text-white text-sm">

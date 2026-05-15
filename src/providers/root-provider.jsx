@@ -5,6 +5,7 @@ import AppRoutes from "../routes/route";
 import "../index.css";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { ReactQueryDevtoolsPanel } from "@tanstack/react-query-devtools";
+import { Toaster } from "react-hot-toast";
 
 const queryClient = new QueryClient({});
 
@@ -22,6 +23,7 @@ function RootProvider() {
               },
             ]}
           />
+          <Toaster position="top-right" reverseOrder={false} />
         </QueryClientProvider>
       </BrowserRouter>
     </StrictMode>
