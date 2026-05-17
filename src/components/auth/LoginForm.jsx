@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
-import { FaFacebook } from "react-icons/fa";
+import AuthButtons from "./AuthButtons";
+import InputField from "./InputField";
 
 function LoginForm({ register, handleSubmit, errors, onSubmit, loading }) {
   return (
@@ -18,23 +18,7 @@ function LoginForm({ register, handleSubmit, errors, onSubmit, loading }) {
           </p>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-3">
-          <button
-            type="button"
-            className="flex-1 flex items-center justify-center gap-2 rounded-2xl bg-violet-200 py-2 sm:py-3 text-xs sm:text-sm font-medium text-slate-700 transition hover:bg-gray-300"
-          >
-            <FcGoogle size={20} />
-            Google
-          </button>
-
-          <button
-            type="button"
-            className="flex-1 flex items-center justify-center gap-2 rounded-2xl bg-violet-200 py-2 sm:py-3 text-xs sm:text-sm text-slate-700 transition hover:bg-gray-300"
-          >
-            <FaFacebook size={20} className="text-blue-600" />
-            Facebook
-          </button>
-        </div>
+        <AuthButtons />
 
         <div className="flex items-center gap-3 text-xs text-slate-400">
           <div className="h-px flex-1 bg-slate-300"></div>
@@ -42,51 +26,31 @@ function LoginForm({ register, handleSubmit, errors, onSubmit, loading }) {
           <div className="h-px flex-1 bg-slate-300"></div>
         </div>
 
-        <div>
-          <label className="text-sm font-medium text-white">Email</label>
+        <InputField
+          label="Email"
+          type="email"
+          placeholder="Enter your email"
+          register={register}
+          name="email"
+          rules={{
+            required: "Email is required",
+            pattern: { value: /\S+@\S+\.\S+/, message: "Invalid email" },
+          }}
+          error={errors.email}
+        />
 
-          <input
-            type="email"
-            autocomplete="one-time-code"
-            autocorrect="off"
-            placeholder="Enter your email"
-            {...register("email", {
-              required: "Email is required",
-              pattern: {
-                value: /\S+@\S+\.\S+/,
-                message: "Invalid email",
-              },
-            })}
-            className="w-full rounded-2xl border border-white/40 bg-violet-200 mt-2 px-3 py-2 sm:px-4 sm:py-3 text-sm outline-none focus:border-violet-400 focus:ring-4 focus:ring-violet-100"
-          />
-
-          {errors.email && (
-            <p className="text-red-400 text-sm mt-1">{errors.email.message}</p>
-          )}
-        </div>
-
-        <div>
-          <label className="text-sm font-medium text-white">Password</label>
-
-          <input
-            type="password"
-            placeholder="Enter your password"
-            {...register("password", {
-              required: "Password is required",
-              minLength: {
-                value: 6,
-                message: "Min 6 characters",
-              },
-            })}
-            className="w-full rounded-2xl border border-white/40 bg-violet-200 mt-2 px-3 py-2 sm:px-4 sm:py-3 text-sm outline-none focus:border-violet-400 focus:ring-4 focus:ring-violet-100"
-          />
-
-          {errors.password && (
-            <p className="text-red-400 text-sm mt-1">
-              {errors.password.message}
-            </p>
-          )}
-        </div>
+        <InputField
+          label="Password"
+          type="password"
+          placeholder="Enter your password"
+          register={register}
+          name="password"
+          rules={{
+            required: "Password is required",
+            minLength: { value: 6, message: "Min 6 characters" },
+          }}
+          error={errors.password}
+        />
 
         <button
           type="submit"
